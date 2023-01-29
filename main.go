@@ -15,9 +15,7 @@ func main() {
 	goingmerry.Get("/", func(res http.ResponseWriter, req *http.Request) {
 		fmt.Println("Hello World From GET")
 	})
-	goingmerry.Post("/", func(res http.ResponseWriter, req *http.Request) {
-		fmt.Println("Hello World From POST")
-	})
+
 	goingmerry.RegisterMiddleware(helloWorld, goingmerry.Route{Method: "GET", Endpoint: "/"})
 	goingmerry.Ahoy(3000)
 
