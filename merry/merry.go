@@ -28,7 +28,8 @@ var middlewares []Middleware
 
 var serverIsRunning = false
 
-func Ahoy(port int) {
+// criar um group router **
+func Sail(port int) {
 	if serverIsRunning {
 		log.Panic("SERVER ALREADY RUNNING")
 	}
@@ -42,7 +43,7 @@ func Ahoy(port int) {
 	}
 }
 
-func HandleController(endpoint string, method string, handler RequestHandeler) {
+func HandleEndpoint(endpoint string, method string, handler RequestHandeler) {
 	if serverIsRunning {
 		log.Panic("SERVER ALREADY RUNNING")
 	}
@@ -56,7 +57,6 @@ func HandleController(endpoint string, method string, handler RequestHandeler) {
 		log.Panicf("at %s Method %s already in use", endpoint, method)
 	}
 	controllers[endpoint][method] = handler
-	return
 }
 func iterateControllers() {
 	for endpoint := range controllers {
@@ -95,17 +95,17 @@ func execMiddlewares(whiteListItem WhiteListItem, handler RequestHandeler, res h
 	}
 }
 func Get(endpoint string, cb RequestHandeler) {
-	HandleController(endpoint, "GET", cb)
+	HandleEndpoint(endpoint, "GET", cb)
 }
 func Post(endpoint string, cb RequestHandeler) {
-	HandleController(endpoint, "POST", cb)
+	HandleEndpoint(endpoint, "POST", cb)
 }
 func Delete(endpoint string, cb RequestHandeler) {
-	HandleController(endpoint, "DELETE", cb)
+	HandleEndpoint(endpoint, "DELETE", cb)
 }
 func Patch(endpoint string, cb RequestHandeler) {
-	HandleController(endpoint, "PATCH", cb)
+	HandleEndpoint(endpoint, "PATCH", cb)
 }
 func Put(endpoint string, cb RequestHandeler) {
-	HandleController(endpoint, "PUT", cb)
+	HandleEndpoint(endpoint, "PUT", cb)
 }
